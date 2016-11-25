@@ -1,0 +1,24 @@
+for v host:
+
+first: open = C:\wamp\bin\apache\apache2.4.9\conf\http.conf.search "vhosts.conf" and remove # tag in fornt.
+
+then: find C:\wamp\bin\apache\apache2.4.9\conf\extra\httpd-vhosts.conf;open and past it->
+	
+	<VirtualHost *:80>
+
+		DocumentRoot "C:\wamp\www\first_lav_app\laravel\public"
+
+		ServerName firstlblog.com
+
+		<Directory  "C:\wamp\www\first_lav_app\laravel\public">
+
+			AllowOverride All
+
+			Require local
+
+		</Directory>
+
+	</VirtualHost>	
+
+
+third: open C:\Windows\System32\drivers\etc\hosts,then copy      127.0.0.1       yourname.com
