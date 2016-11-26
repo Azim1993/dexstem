@@ -16,7 +16,7 @@ Route::get('/view/{id}', 'Videos\SingleVideoPageController@viewCount');
 Route::get('/single/{id}', 'Videos\SingleVideoPageController@show');
 Route::get('/permission', function () {return view('errors.permissionNeeded');});
 Route::get('/user/activation/{token}','ActivationController@userActivate');
-Route::get('/view','ViewCounterController@storeView');
+//Route::post('/view','ViewCounterController@storeView');
 
 Auth::routes();
 

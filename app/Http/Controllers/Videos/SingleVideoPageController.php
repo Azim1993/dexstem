@@ -29,14 +29,14 @@ class SingleVideoPageController extends Controller
             $views = $viewValue->view;
             $updateView = $viewValue->update([ 'view' => $views + 1 ]);
             if($updateView == true)
-                return true;
+                return $views+1;
             return false;
         }
         else
         {
             $viewCreate = $this->createView($postId);
             if($viewCreate == true)
-                return true;
+                return 1;
             return false;
         }
     }

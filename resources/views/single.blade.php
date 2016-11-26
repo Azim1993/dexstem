@@ -6,6 +6,11 @@
      <!-- If you'd like to support IE8 -->
     <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
+    <style>
+        .vjs-poster{
+            background-color: #3097d1;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -31,9 +36,18 @@
                 </div>
      
                 <div class="col-sm-4 related_media">
-                    <form action="" method="post">
+                    <div class="demand">
+                        <div class="demand_title">
+                            Demand Your Expect
+                        </div>
+                        <div class="demand_form">
+                            <form action="" method="post">
+                                <textarea name="demand_body" class="form-control"></textarea>
 
-                    </form>
+                                <button class="btn" type="submit"><span>Demand</span></button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div><!-- /content top area -->
         </div>
@@ -58,7 +72,7 @@
                         </div>
                         <div class="user_view pull-right">
                             <i class="icon icon-tape"></i>
-                            <span>{{ ($video->views == null)? '0' : $video->views['view'] }}</span>
+                            <span id="views">{{ ($video->views == null)? '0' : $video->views['view'] }}</span>
                         </div>
                     </div>
                     <div class="media_discription">
@@ -428,7 +442,7 @@
         var initial = 0;
         $('.player_area').click(function(){
             if(initial == 0 ){
-                setTimeout(postView, 30000);
+                setTimeout(postView, 3000);
                 initial++;
             }
             else {
@@ -436,13 +450,10 @@
             }
         });
         function postView() {
-            $.get('/view/<?php encrypt($video->id); ?>')
-            .error(
-                console.log('Error' + data)
-            )
-            .success(
-                console.log('added view' + data)
-            );
+            var id = '<?php echo encrypt($video->id) ?>';
+            $.get("/view/"+id, function(data) {
+                $('#views').text(data)
+            });
         }
     </script>
 
