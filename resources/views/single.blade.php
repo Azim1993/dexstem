@@ -24,9 +24,9 @@
                     <video id="my-video" class="video-js" controls preload="auto" width="auto" height="350"
                            poster="{{ url('/thumbnail/'.$video->mediaThumbnail) }}" data-setup="{}">
                         @if(Auth::guest())
-                            <source src="{{ url('videos/'.$video->video['id'].'/demo'.'.'.$video->video['videoName']) }}" type='video/mp4'>
+                            <source src="{{ url('videos/'.$video->id.'/'.$video->video['demoName']) }}" type='video/mp4'>
                         @else
-                            <source src="{{ url('videos/'.$video->video['id'].'/premium'.'.'.$video->video['videoName']) }}" type='video/mp4'>
+                            <source src="{{ url('videos/'.$video->id.'/'.$video->video['videoName']) }}" type='video/mp4'>
                         @endif
                         <p class="vjs-no-js">
                             To view this video please enable JavaScript, and consider upgrading to a web browser that
