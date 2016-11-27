@@ -30,6 +30,12 @@ At last generate application key, which will be used for password hashing, sessi
 ```
 php artisan key:generate
 ```
+##link with storage folder
+
+```
+php artisan storage:link 
+```
+
 ##Run server
 
 Run server using this command
