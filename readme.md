@@ -30,6 +30,12 @@ At last generate application key, which will be used for password hashing, sessi
 ```
 php artisan key:generate
 ```
+```
+##Database migrate 
+
+```
+php artisan migrate 
+```
 ##link with storage folder
 
 ```
