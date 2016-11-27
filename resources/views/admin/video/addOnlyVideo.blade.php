@@ -63,7 +63,7 @@
                                             No Video Upload Yet
                                         @else
                                             <video class="video-js" controls preload="auto" width="auto" height="180" poster="{{ url('/thumbnail/'.$video->media['mediaThumbnail']) }}" data-setup="{}">
-                                                <source src="{{ url('videos/'.$id.'/demo.'.$video->demoName) }}" type='video/mp4'>
+                                                <source src="{{ url('videos/'.$id.'/'.$video->demoName) }}" type='video/mp4'>
                                                 {{-- <source src="MY_VIDEO.webm" type='video/webm'> --}}
                                                 <p class="vjs-no-js">
                                                     To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -102,7 +102,7 @@
                                             No Video Upload Yet
                                         @else
                                             <video class="video-js" controls preload="auto" width="auto" height="180" poster="{{ url('/thumbnail/'.$video->media['mediaThumbnail']) }}" data-setup="{}">
-                                                <source src="{{ url('videos/'.$id.'/premium.'.$video->videoName) }}" type='video/mp4'>
+                                                <source src="{{ url('videos/'.$id.'/'.$video->videoName) }}" type='video/mp4'>
                                                 {{-- <source src="MY_VIDEO.webm" type='video/webm'> --}}
                                                 <p class="vjs-no-js">
                                                     To view this video please enable JavaScript, and consider upgrading to a web browser that

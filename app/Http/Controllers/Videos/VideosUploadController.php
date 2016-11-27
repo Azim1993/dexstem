@@ -25,19 +25,19 @@ class VideosUploadController extends Controller
     {
         $this->validate($request,['demoVideo' => 'required | mimes:mp4,mov,ogg,qt']);
         $demo = $request->file('demoVideo');
-        $demoExt = $demo->getClientOriginalExtension();
+        $demoName = $demo->getClientOriginalName();
         $destination = public_path() . '/videos/'.$id;
-        $demoMedia = $demo->move($destination,"demo.{$demoExt}");
+        $demoMedia = $demo->move($destination,$demoName);
         if($this->checkVideosTable($id) != null)
         {
-            $demoUpload = Videos::where('media_id',$id)->update(['demoName' => $demoExt]);
+            $demoUpload = Videos::where('media_id',$id)->update(['demoName' => $demoName]);
             if($demoUpload == true)
                 return redirect('/admin/video/'.$id.'/add-video')->with('success','Demo Video update');
             return back()->with('warning','Demo Video is not update');
         }else{
 //            return 'not found';
             $demoUpload = Videos::create([
-                'demoName' => $demoExt,
+                'demoName' => $demoName,
                 'media_id' => $id
             ]);
             if($demoUpload == true)
@@ -51,19 +51,19 @@ class VideosUploadController extends Controller
         $this->validate($request,['premiumVideo' => 'required | mimes:mp4,mov,ogg,qt']);
 
         $premium = $request->file('premiumVideo');
-        $premiumExt = $premium->getClientOriginalExtension();
+        $premiumName = $premium->getClientOriginalName();
         $destination = public_path() . '/videos/'.$id;
-        $premiumMedia = $premium->move($destination,"premium.{$premiumExt}");
+        $premiumMedia = $premium->move($destination,$premiumName);
         if($this->checkVideosTable($id) != null)
         {
-            $premiumUpload = Videos::where('media_id',$id)->update(['videoName' => $premiumExt]);
+            $premiumUpload = Videos::where('media_id',$id)->update(['videoName' => $premiumName]);
             if($premiumUpload == true)
                 return redirect('/admin/video/'.$id.'/add-video')->with('success','Premium Video update');
             return back()->with('warning','Premium Video is not update');
         }else{
 //            return 'not found';
             $premiumUpload = Videos::create([
-                'videoName' => $premiumExt,
+                'videoName' => $premiumName,
                 'media_id' => $id
             ]);
             if($premiumUpload == true)

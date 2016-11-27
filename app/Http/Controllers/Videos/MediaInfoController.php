@@ -27,8 +27,7 @@ class MediaInfoController extends Controller
     protected function store(MediaUploadValidator $request)
     {
         $thumb = $request->file('mediaThumbnail');
-        $thumbExt = $thumb->getClientOriginalExtension();
-        $thumbName = Carbon::now()."thumbnail.{$thumbExt}";
+        $thumbName = $thumb->getClientOriginalName();
         $thumbDestination = public_path() . '/thumbnail/';
         $mediaThumb = $thumb->move($thumbDestination,$thumbName);
         if($mediaThumb == true)
