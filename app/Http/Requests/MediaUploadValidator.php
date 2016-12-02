@@ -24,7 +24,7 @@ class MediaUploadValidator extends FormRequest
     public function rules()
     {
         return [
-            'mediaTitle' => 'required',
+            'mediaTitle' => 'required | unique:mediaDetail,title',
             'mediaDiscription'=> 'required',
             'mediaCategory' => 'required',
             'mediaThumbnail' => 'required | mimes:jpeg,jpg,png | max:1000'

@@ -50,6 +50,56 @@ class MediaInfoController extends Controller
         $media = MediaInfo::find($id);
         if($media != null)
             return view('admin.video.singleVideo',compact('media'));
-        return redirect('all-media')->with('warning','No media found for this id');
+        return redirect('/admin/all-media')->with('warning','No media found for this id');
+    }
+
+    protected function edit($mediaId)
+    {
+        $categorys = Categories::all();
+        $media = MediaInfo::where('id',$mediaId)->first();
+        if($media)
+            return view('admin.video.editVideo',compact('media','categorys'));
+        return redirect('/admin/all-media')->with('warning','No media found for this id');
+    }
+
+    protected function update($mediaId, Request $request)
+    {
+        $this->validate($request,[
+            'mediaDiscription'=> 'required',
+            'mediaCategory' => 'required',
+        ]);
+        $media = MediaInfo::where('id',$mediaId)->first();
+        $thumb = $request->file('mediaThumbnail');
+        if($thumb != null)
+        {
+            $this->deleteMediaThumbnail($media->mediaThumbnail);
+            $thumbName = $thumb->getClientOriginalName();
+            $thumbDestination = public_path() . '/thumbnail/';
+            $mediaThumb = $thumb->move($thumbDestination,$thumbName);
+            if($mediaThumb == true)
+            {
+                $updateMedia = $media->update([
+                    'description' => $request->input('mediaDiscription'),
+                    'category_id' => $request->input('mediaCategory'),
+                    'mediaThumbnail' => $thumbName,
+                ]);
+            }
+
+        }else
+        {
+            $updateMedia = $media->update([
+                'description' => $request->input('mediaDiscription'),
+                'category_id' => $request->input('mediaCategory'),
+            ]);
+        }
+
+        if($updateMedia == true)
+            return redirect('/admin/media/'.$mediaId)->with('success','media updated');
+            return back()->with('warning','media updated fail');
+    }
+
+    private function deleteMediaThumbnail($thumbnail)
+    {
+        return \File::delete('thumbnail/'.$thumbnail);
     }
 }

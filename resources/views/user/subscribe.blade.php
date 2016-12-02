@@ -19,12 +19,18 @@
 
                     <!-- admin content -->
                     <div class="col-sm-10 admin_content">
-                    <div>
-                        {{ $subscribe }}
-                    </div>
-                        <form action="{{ url('/user/create_subscribe') }}" method="POST">
-                            {{ csrf_field() }}
-                            <script
+                    @if(Auth::user()->subscribed('main'))
+                        <div class="col-sm-6">
+                            <div class="well well-sm">You are now
+                                @if(Auth::user()->subscription('main')->cancelled())
+                                    <span class="label label-success">Active</span>
+                                @else
+                                    <span class="label label-danger">UnActive</span>
+                                @endif
+                            </div>
+                            <form action="{{ url('/user/create_subscribe') }}" method="POST">
+                                {{ csrf_field() }}
+                                <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="pk_test_TLTrAtcbufmQbw18DFM04RG2"
                                     data-amount="1000"
@@ -33,8 +39,27 @@
                                     data-image="{{ asset('/images/logo.png') }}"
                                     data-email="{{ Auth::user()->email }}"
                                     data-locale="auto">
-                            </script>
-                        </form>
+                                </script>
+                            </form>
+                        </div>
+                    @else
+                        <div class="col-sm-6">
+                            <div class="wll well-sm">You do not payment Yet</div>
+                            <form action="{{ url('/user/create_subscribe') }}" method="POST">
+                                {{ csrf_field() }}
+                                <script
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_TLTrAtcbufmQbw18DFM04RG2"
+                                    data-amount="1000"
+                                    data-name="Demo Site"
+                                    data-description="Weekly Premium"
+                                    data-image="{{ asset('/images/logo.png') }}"
+                                    data-email="{{ Auth::user()->email }}"
+                                    data-locale="auto">
+                                </script>
+                            </form>
+                        </div>
+                    @endif
                     </div><!-- /admin content -->
                 </div>
             </div>

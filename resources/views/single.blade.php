@@ -41,9 +41,9 @@
                             Demand Your Expect
                         </div>
                         <div class="demand_form">
-                            <form action="" method="post">
-                                <textarea name="demand_body" class="form-control"></textarea>
-
+                            <form action="{{ url('/user/store_demand') }}" method="post">
+                                {{ csrf_field() }}
+                                <textarea name="demand_body" placeholder="Write Your Demand" class="form-control"></textarea>
                                 <button class="btn" type="submit"><span>Demand</span></button>
                             </form>
                         </div>
@@ -431,6 +431,10 @@
     <script src="{{ asset('/js/videojs.js')}}"></script>
     <script src="http://cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
     <script type="text/javascript">
+        $('.player_area').bind('contextmenu', function(e) {
+            return false;
+        });
+
         videojs('my-video').ready(function() {
           this.hotkeys({
             volumeStep: 0.1,

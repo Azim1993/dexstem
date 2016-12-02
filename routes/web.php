@@ -23,15 +23,20 @@ Auth::routes();
 //-- media manage --//
 Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
     Route::get('/deshboard', function () {return view('admin.deshboard');});
+//-- manage media info --//
     Route::get('/all-media', 'Videos\MediaInfoController@index');
     Route::get('/add-media', 'Videos\MediaInfoController@create');
-    Route::get('/media/{id}', 'Videos\MediaInfoController@showMedia');
     Route::post('/create-media', 'Videos\MediaInfoController@store');
+    Route::get('/media/{id}', 'Videos\MediaInfoController@showMedia');
+    Route::get('/media/{id}/edit', 'Videos\MediaInfoController@edit');
+    Route::post('/media/{id}/update', 'Videos\MediaInfoController@update');
 
 // store only videos
     Route::get('/video/{id}/add-video','Videos\VideosUploadController@addVideo');
     Route::post('/video/{id}/store-demo-video', 'Videos\VideosUploadController@storeDemoVideo');
     Route::post('/video/{id}/store-premium-video', 'Videos\VideosUploadController@storePremiumVideo');
+    Route::post('/video/{mediaId}/update-demo-video/{videoId}','Videos\VideosUploadController@updateDemo');
+    Route::post('/video/{mediaId}/update-premium-video/{videoId}','Videos\VideosUploadController@updatePremium');
 //-- media manage --//
 
 //-- category --//
@@ -41,6 +46,9 @@ Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
     Route::post('/category/{id}/update','CategoriesController@update');
     Route::get('/category/{id}/delete','CategoriesController@catDelete');
 
+//-- user manage --//
+    Route::get('/users','UserDetailController@users');
+
 });
 
 
@@ -48,6 +56,8 @@ Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
     Route::get('/deshboard', function () {return view('admin.deshboard');});
     Route::get('/subscribe', 'SubscribeController@subscribeForm');
     Route::post('/create_subscribe', 'SubscribeController@subscribeCreate');
+
+    Route::post('/store_demand','OnDemandController@store');
 });
 Route::group(['middleware' => 'auth'], function() {
     Route::post('/media_like/{id}', 'Videos\LikeDislikeController@storeLike');

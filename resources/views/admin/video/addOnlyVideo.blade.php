@@ -39,27 +39,24 @@
 
                             <!-- demo -->
                             <div class="panel panel-default">
-                                <div class="panel-heading">Add Demo Video</div>
+                                <div class="panel-heading">{{ ($video == null || $video->demoName == null)?'Add':'Update' }} Demo Video</div>
                                 <div class="panel-body">
                                     <!--video upload area-->
                                     <div class="col-sm-6 video_upload_area">
-                                    <form action="{{ url('/admin/video/'.$id.'/store-demo-video') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{($video == null || $video->demoName == null)? url('/admin/video/'.$id.'/store-demo-video'): url('/admin/video/'.$id.'/update-demo-video/'.$video->id) }}" method="POST" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <div class="form-group {{ $errors->has('demoVideo') ? ' has-error' : '' }}">
-                                            <input type="file" class="form-control video_upload" name="demoVideo"  value="{{ old('demoVideo') }}"  accept=".mp4,.avi,.wmv,.3gp,.mov,.ogg,.qt,.mkv">
+                                            <input type="file" class="form-control video_upload" name="demoVideo"   accept=".mp4,.avi,.wmv,.3gp,.mov,.ogg,.qt,.mkv">
                                             @include('errors.formError',['inputName' => 'demoVideo'])
                                         </div><!-- /discription -->
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-xs btn-block">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-xs btn-block">{{ ($video == null || $video->demoName == null)?'Submit':'update Demo' }}</button>
                                         </div>
                                     </form>
                                     </div><!--/ video upload area-->
                                     <!--uploaded video play area-->
                                     <div class="col-sm-6 uploaded_play_area">
-                                        @if($video == null)
-                                            No Video Upload Yet
-                                        @else
-                                        @if($video->demoName == null)
+                                        @if($video == null || $video->demoName == null)
                                             No Video Upload Yet
                                         @else
                                             <video class="video-js" controls preload="auto" width="auto" height="180" poster="{{ url('/thumbnail/'.$video->media['mediaThumbnail']) }}" data-setup="{}">
@@ -71,34 +68,30 @@
                                                 </p>
                                             </video>
                                         @endif
-                                        @endif
                                     </div><!--/uploaded video play area-->
                                 </div>
                             </div> <!-- /demo -->
 
                             <!-- /premium -->
                             <div class="panel panel-default">
-                                <div class="panel-heading">Add Premium Video</div>
+                                <div class="panel-heading">{{ ($video == null || $video->videoName == null)?'Add':'Update' }} Premium Video</div>
                                 <div class="panel-body">
                                     <!--video upload area-->
                                     <div class="col-sm-6 video_upload_area">
-                                    <form action="{{ url('/admin/video/'.$id.'/store-premium-video') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ ($video == null || $video->videoName == null)? url('/admin/video/'.$id.'/store-premium-video'): url('/admin/video/'.$id.'/update-premium-video/'.$video->id) }}" method="POST" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <div class="form-group {{ $errors->has('premiumVideo') ? ' has-error' : '' }}">
-                                            <input type="file" class="form-control video_upload" name="premiumVideo"  value="{{ old('demoVideo') }}"  accept=".mp4,.avi,.wmv,.3gp,.mov,.ogg,.qt,.mkv">
+                                            <input type="file" class="form-control video_upload" name="premiumVideo"   accept=".mp4,.avi,.wmv,.3gp,.mov,.ogg,.qt,.mkv">
                                             @include('errors.formError',['inputName' => 'premiumVideo'])
                                         </div><!-- /discription -->
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-xs btn-block">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-xs btn-block">{{ ($video == null || $video->videoName == null)?'Submit':'update Premium' }}</button>
                                         </div>
                                     </form>
                                     </div><!--/ video upload area-->
                                     <!--uploaded video play area-->
                                     <div class="col-sm-6 uploaded_play_area">
-                                        @if($video == null)
-                                            No Video Upload Yet
-                                        @else
-                                        @if($video->videoName == null)
+                                        @if($video == null || $video->videoName == null)
                                             No Video Upload Yet
                                         @else
                                             <video class="video-js" controls preload="auto" width="auto" height="180" poster="{{ url('/thumbnail/'.$video->media['mediaThumbnail']) }}" data-setup="{}">
@@ -109,7 +102,6 @@
                                                     <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                                                 </p>
                                             </video>
-                                        @endif
                                         @endif
                                     </div><!--/uploaded video play area-->
                                 </div>
@@ -125,22 +117,5 @@
 @endsection
 
 @section('customJs')
-
     <script src="{{ asset('/js/videojs.js')}}"></script>
-    <script src="http://cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
-    <script>
-//        videojs('demo-video').ready(function() {
-//            this.hotkeys({
-//                volumeStep: 0.1,
-//                seekStep: 5
-//            });
-//        });
-//        videojs('premium-video').ready(function() {
-//            this.hotkeys({
-//                volumeStep: 0.1,
-//                seekStep: 5
-//            });
-//        });
-    </script>
-
 @endsection

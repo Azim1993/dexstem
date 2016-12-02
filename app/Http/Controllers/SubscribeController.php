@@ -11,8 +11,8 @@ class SubscribeController extends Controller
 {
     public function subscribeForm()
     {
-        $subscribe = (Auth::user()->subscribed('main'))?'subscribed': 'not yet subscribe';
-        return view('user.subscribe',compact('subscribe'));
+//        $subscribe = (Auth::user()->subscribed('main'))?'subscribed': 'not yet subscribe';
+        return view('user.subscribe');
     }
 
     public function subscribeCreate(Request $request)

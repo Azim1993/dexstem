@@ -30,9 +30,14 @@ class User extends Authenticatable
     ];
 
 
-//    public function subscription()
-//    {
-//        return $this->hasOne('App\Subscriptions','user_id','id');
-//    }
+    public function userSubscription()
+    {
+        return $this->hasOne('App\Subscriptions','user_id','id');
+    }
+
+    public function demand()
+    {
+        return $this->hasMany('App\Demand','userId','id');
+    }
 
 }

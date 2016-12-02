@@ -72,8 +72,59 @@ class VideosUploadController extends Controller
         }
     }
 
+    protected function updateDemo($mediaId,$videoId, Request $request)
+    {
+        $this->validate($request,['demoVideo' => 'required | mimes:mp4,mov,ogg,qt']);
+
+        $video = $this->checkVideoForUpdate($mediaId,$videoId);
+        \File::delete('videos/'.$mediaId.'/'.$video->demoName);
+        $demo = $request->file('demoVideo');
+        $demoName = $demo->getClientOriginalName();
+        $destination = public_path() . '/videos/'.$mediaId;
+        $demoMedia = $demo->move($destination,$demoName);
+        if($video == true && $demoMedia == true)
+        {
+            $updateVideo = $video->update(['demoName'=> $demoName] );
+            if($updateVideo == true)
+                return back()->with('success','video updated');
+            return back()->with('warning','video not updated');
+        } else
+        {
+            return redirect('admin/all-media')->with('warning','no media found at this id or errors happend');
+        }
+
+    }
+
+    protected function updatePremium($mediaId,$videoId, Request $request)
+    {
+        $this->validate($request,['premiumVideo' => 'required | mimes:mp4,mov,ogg,qt']);
+
+        $video = $this->checkVideoForUpdate($mediaId,$videoId);
+        \File::delete('videos/'.$mediaId.'/'.$video->demoName);
+        $premium = $request->file('premiumVideo');
+        $premiumName = $premium->getClientOriginalName();
+        $destination = public_path() . '/videos/'.$mediaId;
+        $premiumMedia = $premium->move($destination,$premiumName);
+        if($video == true && $premiumMedia == true)
+        {
+            $updateVideo = $video->update(['videoName'=> $premiumName] );
+            if($updateVideo == true)
+                return back()->with('success','video updated');
+            return back()->with('warning','video not updated');
+        } else
+        {
+            return redirect('admin/all-media')->with('warning','no media found at this id or errors happend');
+        }
+
+    }
+
     protected function checkVideosTable($id)
     {
         return Videos::where('media_id',$id)->first();
+    }
+
+    protected function checkVideoForUpdate($mediaId,$videoId)
+    {
+        return Videos::where(['id'=>$videoId,'media_id'=>$mediaId])->first();
     }
 }

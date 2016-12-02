@@ -34,7 +34,7 @@
                             <label for="mediaTitle" class="col-sm-2 control-label">Media Title</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="Media Title" name="mediaTitle" value="{{ old('mediaTitle') }}">
-                                @include('errors.formError',['inputName' => 'MediaTitle'])
+                                @include('errors.formError',['inputName' => 'mediaTitle'])
                             </div>
                         </div><!-- /title -->
 
@@ -68,7 +68,7 @@
                             <label for="mediaThumbnail" class="col-sm-2 control-label">Media Discription</label>
                             <div class="col-sm-6">
                                 <div class="mediaImage">
-                                    <input type="file" name="mediaThumbnail" value="{{ old('mediaThumbnail') }} ">
+                                    <input type="file" name="mediaThumbnail" value="{{ old('mediaThumbnail') }} " accept=".jpeg, .jpg, .jpe, .jfif, .jif">
                                     <img src="" alt="" width="200" style="display:none;">
                                 </div>
                             </div>
