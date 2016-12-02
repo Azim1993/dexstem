@@ -49,4 +49,3 @@ php artisan migrate
 4.Sajid
 
 
-
