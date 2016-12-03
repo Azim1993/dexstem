@@ -33,4 +33,9 @@ class MediaInfo extends Model
     {
         return $this->hasOne('App\ViewCounter','postId','id')->select('view');
     }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comments','postId','id');
+    }
 }

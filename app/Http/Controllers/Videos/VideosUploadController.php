@@ -118,6 +118,22 @@ class VideosUploadController extends Controller
 
     }
 
+    public function delete($mediaId)
+    {
+        $video = $this->checkVideosTable($mediaId);
+        if($video == true)
+        {
+            \File::delete('videos/'.$mediaId.'/'.$video->demoName);
+            \File::delete('videos/'.$mediaId.'/'.$video->videoName);
+            $video->delete();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     protected function checkVideosTable($id)
     {
         return Videos::where('media_id',$id)->first();

@@ -96,6 +96,13 @@
                             <a href="{{ url('/admin/video/'.$media->id.'/add-video') }}" class="btn btn-primary btn-sm">Add Video</a>
                         </div>
                         @endif
+                        <hr>
+                        <div class="">
+                            <form action="{{ url('/admin/media/'.$media->id.'/delete') }}" method="post">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-sm btn-danger">Delete Media</button>
+                            </form>
+                        </div>
                     </div><!-- /admin content -->
                 </div>
             </div>

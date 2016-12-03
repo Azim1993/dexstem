@@ -171,7 +171,14 @@ font-size: 11px;
 .single_slide:hover .panel-body h5{
 	bottom: 0%;
 }
-
+.comment_owner{
+	font-size: 16px;
+	font-weight: 700;
+	color: #303030;
+}
+.comment_owner .time{
+	font-size: 12px;
+}
 
 /* -------------------------------
 	single video Style
@@ -257,23 +264,13 @@ font-size: 11px;
 .comment>div>form>div{
 	padding: 0;
 }
-.comment>div>form>div>.form-control{
-	border-radius:3px 0 0 3px;
+.comment>div>form>.form-control{
+	border-radius: 0;
 }
-.comment>div>form>div>.btn{
-	border-radius: 0 3px 3px 0;
-	width: 100%;
-	height: 58px;
-}
-.btn_comment{
-    font-size: 15px;
-    padding: 6px;
+.comment>div>form>.row{
+	margin-top: 15px;
 }
 
-.btn_comment .badge{
-	position: relative;
-	font-family: sans-serif;
-}
 .popular_section{}
 .popular_section_single{
     margin-top: 18px;

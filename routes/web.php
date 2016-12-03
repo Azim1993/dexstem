@@ -16,6 +16,7 @@ Route::get('/view/{id}', 'Videos\SingleVideoPageController@viewCount');
 Route::get('/single/{id}', 'Videos\SingleVideoPageController@show');
 Route::get('/permission', function () {return view('errors.permissionNeeded');});
 Route::get('/user/activation/{token}','ActivationController@userActivate');
+Route::get('/comments/{postId}','CommentController@showComment');
 //Route::post('/view','ViewCounterController@storeView');
 
 Auth::routes();
@@ -30,6 +31,7 @@ Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
     Route::get('/media/{id}', 'Videos\MediaInfoController@showMedia');
     Route::get('/media/{id}/edit', 'Videos\MediaInfoController@edit');
     Route::post('/media/{id}/update', 'Videos\MediaInfoController@update');
+    Route::post('/media/{id}/delete', 'Videos\MediaInfoController@delete');
 
 // store only videos
     Route::get('/video/{id}/add-video','Videos\VideosUploadController@addVideo');
@@ -48,6 +50,9 @@ Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
 
 //-- user manage --//
     Route::get('/users','UserDetailController@users');
+//-- demand mange  --//
+    Route::get('/demands','OnDemandController@index');
+    Route::post('/demand/{id}/publish','OnDemandController@publish');
 
 });
 
@@ -58,6 +63,9 @@ Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
     Route::post('/create_subscribe', 'SubscribeController@subscribeCreate');
 
     Route::post('/store_demand','OnDemandController@store');
+
+//    comment
+    Route::post('/store_comment/{postId}','CommentController@storeComment');
 });
 Route::group(['middleware' => 'auth'], function() {
     Route::post('/media_like/{id}', 'Videos\LikeDislikeController@storeLike');

@@ -94,18 +94,24 @@
                 
                 <div class="panel panel-default comment">
                     <div class="panel-body">
-                        <form action="" class="">
-                            <div class="col-sm-10">
-                                <textarea name="" class="form-control" placeholder="Your comment"></textarea>
+                        <form action="{{ url('/user/store_comment/'.$video->id) }}" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group  {{ $errors->has('comment') ? ' has-error' : '' }}">
+                                <textarea name="comment" class="form-control" placeholder="Your comment"></textarea>
+                                @include('errors.formError',['inputName'=>'comment'])
                             </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                            <div class="row">
+                                <div class="col-xs-6 text-left">
+                                    <a href="#" id="comments">{{ $video->comment->count() == 0? 'No Comment':'Comments '.$video->comment->count() }}</a>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <button class="btn btn-sm btn-primary" type="submit">Comment</button>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <div class="panel-footer">
-                         <a href="" class="btn btn_comment btn-primary btn-block btn-sm">Comments <span class="badge">25</span></a>
-                    </div>
+                </div>
+                <div id="comment_display">
                 </div>
                 <div class="popular_section popular_section_single">
                     <div class="panel panel-default">
@@ -271,6 +277,7 @@
                     </div>
     
                     <div class="panel-body right_content_body">
+                        {{--{{ DB::table('mediaInfo') }}--}}
                         <div class="single_popular">
                             <a href="" class="">
                             <div class="col-xs-6 single_popular_img">
@@ -459,6 +466,59 @@
                 $('#views').text(data)
             });
         }
+
+        $('#comments').click(function(e) {
+            e.preventDefault();
+            var id = '<?php echo $video->id ?>';
+            var display_results = $("#comment_display");
+            display_results.html("loading...");
+            var results  = '<div class="panel panel-default">';
+                results += '<div class="panel">';
+                results += '<div class="panel-body">';
+            $.get('/comments/'+id,function(data) {
+                if (data.length == 0) {
+                    results = 'No Results';
+                } else {
+                    var sl = 1
+                    $.each(data, function() {
+                        console.log(data);
+                        results += '<div class="row" style="padding: 5px 0">';
+                            results += '<div class="col-sm-2">';
+                                results += '<div class="comment_owner" ">Azim</div>';
+                                results +=  '<div class="time">'+ prettyDate(this.created_at)+'</div>';
+                            results += '</div>';
+                            results += '<div style="border-left: 2px solid #efefef" class="col-sm-10">';
+                                results += this.comment;
+                            results += '</div>';
+                        results += '</div>';
+                        if(data.length > sl){
+                            results += '<hr>';
+                        }
+                        sl =sl+1;
+                    });
+                }
+                results += "</div></div></div>";
+                display_results.html(results);
+            });
+        });
+        function prettyDate(time) {
+            var date = new Date((time || "").replace(/-/g, "/").replace(/[TZ]/g, " ")),
+                    diff = (((new Date()).getTime() - date.getTime()) / 1000),
+                    day_diff = Math.floor(diff / 86400);
+
+            if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31) return;
+
+            return day_diff == 0 && (
+                    diff < 60 && "just now" || diff < 120 && "1 minute ago" || diff < 3600 && Math.floor(diff / 60) + " minutes ago" || diff < 7200 && "1 hour ago" || diff < 86400 && Math.floor(diff / 3600) + " hours ago") || day_diff == 1 && "Yesterday" || day_diff < 7 && day_diff + " days ago" || day_diff < 31 && Math.ceil(day_diff / 7) + " weeks ago";
+        }
+
+        // If jQuery is included in the page, adds a jQuery plugin to handle it as well
+        if (typeof jQuery != "undefined") jQuery.fn.prettyDate = function() {
+            return this.each(function() {
+                var date = prettyDate(this.title);
+                if (date) jQuery(this).text(date);
+            });
+        };
     </script>
 
 @endsection

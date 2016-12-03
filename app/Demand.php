@@ -10,7 +10,7 @@ class Demand extends Model
 
     protected $table = 'demand';
 
-    protected $fillable = ['demand','userId'];
+    protected $fillable = ['demand','userId','publish'];
 
 
     protected function user()

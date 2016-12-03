@@ -11,7 +11,7 @@ class OnDemandController extends Controller
     protected function index()
     {
         $demands = Demand::orderBy('created_at','desc')->limit(20)->get();
-        return view('',compact('demands'));
+        return view('user.demand',compact('demands'));
     }
 
     protected function userDemands()
@@ -44,5 +44,13 @@ class OnDemandController extends Controller
         if($demand == true)
             return back()->with('success','Demand Requested');
         return back()->withInput()->with('warning','Demand Requested failed');
+    }
+
+    protected function publish($id)
+    {
+        $publish = Demand::where('id',$id)->update(['publish'=> true]);
+        if($publish)
+            return back()->with('success','Marked as publish');
+        return back()->with('warning','can not Marked as publish');
     }
 }

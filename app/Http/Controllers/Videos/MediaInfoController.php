@@ -102,4 +102,15 @@ class MediaInfoController extends Controller
     {
         return \File::delete('thumbnail/'.$thumbnail);
     }
+
+    protected function delete($id)
+    {
+        (new VideosUploadController())->delete($id);
+        $media = MediaInfo::where('id',$id)->first();
+        $this->deleteMediaThumbnail($media->mediaThumbnail);
+        $media->delete();
+        if($media == true)
+            return redirect('admin/all-media')->with('success','Media deleted');
+        return redirect('admin/all-media')->with('warning','Media not deleted');
+    }
 }
