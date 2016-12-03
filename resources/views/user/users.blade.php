@@ -35,9 +35,15 @@
                                         <td>{{ $sl }}</td>
                                         <td>{{ $user->firstName.' '.$user->lastName }}</td>
                                         <td>@if($user->userSubscription)
-                                            {{ ($user->subscription('main')->cancelled())?'Active':'Unactivated' }}
-                                            @else
-                                                Not Payment
+                                                @if($user->subscribed('main'))
+                                                    @if($user->subscription('main')->cancelled())
+                                                        <span class="label label-danger">Canceled</span>
+                                                    @elseif($user->subscription('main'))
+                                                        <span class="label label-success">Active</span>
+                                                    @endif
+                                                @endif
+                                           @else
+                                                <span class="label label-info">Not Payment</span>
                                             @endif
                                         </td>
                                     </tr>

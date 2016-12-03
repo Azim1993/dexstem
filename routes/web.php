@@ -62,6 +62,8 @@ Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
     Route::get('/subscribe', 'SubscribeController@subscribeForm');
     Route::post('/create_subscribe', 'SubscribeController@subscribeCreate');
     Route::post('/resume_subscribe', 'SubscribeController@subscribeResume');
+    Route::post('/resume_subscribe', 'SubscribeController@subscribeUpgrade');
+    Route::post('/cancel_subscribe', 'SubscribeController@subscribeCancel');
 
     Route::post('/store_demand','OnDemandController@store');
 

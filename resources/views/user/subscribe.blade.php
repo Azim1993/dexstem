@@ -22,14 +22,10 @@
                     @if(Auth::user()->subscribed('main'))
                         <div class="col-sm-6">
                             @if(Auth::user()->subscription('main')->cancelled())
-                                <div class="well well-sm">You are now
-                                    <span class="label label-success">Active</span>
+                                <div class="well well-sm">You are
+                                    <span class="label label-warning">Cancelled</span> subscription . Please Re-subscribe
                                 </div>
-                            @else
-                                <div class="well well-sm">You are now
-                                    <span class="label label-danger">UnActive</span>
-                                    <br> Please Resume Your subscription
-                                </div>
+
                                 <form action="{{ url('/user/resume_subscribe') }}" method="POST">
                                     {{ csrf_field() }}
                                     <script
@@ -42,6 +38,32 @@
                                             data-email="{{ Auth::user()->email }}"
                                             data-locale="auto">
                                     </script>
+                                </form>
+                            @else
+                                <div class="well well-sm">You are now
+                                    <span class="label label-danger">Active</span>
+                                    <br> Please Upgrade Your subscription
+                                </div>
+                                <form action="{{ url('/user/upgrade_subscribe') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <label for="upgrade"> Upgrade Subscription</label>
+                                    <div class="form-group">
+                                        <select name="plans" class="form-control">
+                                            <option value="weekly">Weekly</option>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="yearly">Yearly</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary">Upgrade Subscription</button>
+                                    </div>
+                                </form><hr>
+                                <form action="{{ url('/user/cancel_subscribe') }}" method="POST">
+                                    <label for="upgrade"> Cancel Subscription</label>
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <button class="btn btn-danger">Cancel Subscription</button>
+                                    </div>
                                 </form>
                             @endif
                         </div>

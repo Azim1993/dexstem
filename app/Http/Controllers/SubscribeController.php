@@ -23,8 +23,20 @@ class SubscribeController extends Controller
 
     public function subscribeResume(Request $request)
     {
-        Auth::user()->newSubscription('main', 'weekly')->resume($request->input('stripeToken'));
+        Auth::user()->subscription('weekly')->resume($request->input('stripeToken'));
         return redirect('/user/subscribe')->with('success','Successfully subscribed');
+    }
+
+    public function subscribeUpgrade(Request $request)
+    {
+        Auth::user()->subscription($request->input('plans'))->swap($request->input('stripeToken'));
+        return redirect('/user/subscribe')->with('success','Successfully upgrade');
+    }
+
+    public function subscribeCancel(Request $request)
+    {
+        Auth::user()->subscription()->cancel();
+        return redirect('/user/subscribe')->with('success','Successfully canceled');
     }
 
 }

@@ -22,8 +22,9 @@
                 <div class="alert alert-warning" role="alert">You Have to subscrive to Play full video</div>
             @elseif(Auth::user()->subscribed('main'))
                 @if(Auth::user()->subscription('main')->cancelled())
-                @else
                     <div class="alert alert-warning" role="alert">You Have to Renew Your subscription to Play full video</div>
+                @else
+
                 @endif
             @else
                 <div class="alert alert-warning" role="alert">You Have to subscrive to Play full video</div>
@@ -36,9 +37,9 @@
                             <source src="{{ url('videos/'.$video->id.'/'.$video->video['demoName']) }}" type='video/mp4'>
                         @elseif(Auth::user()->subscribed('main'))
                             @if(Auth::user()->subscription('main')->cancelled())
-                                <source src="{{ url('videos/'.$video->id.'/'.$video->video['videoName']) }}" type='video/mp4'>
-                            @else
                                 <source src="{{ url('videos/'.$video->id.'/'.$video->video['demoName']) }}" type='video/mp4'>
+                            @else
+                                <source src="{{ url('videos/'.$video->id.'/'.$video->video['videoName']) }}" type='video/mp4'>
                             @endif
                         @else
                             <source src="{{ url('videos/'.$video->id.'/'.$video->video['demoName']) }}" type='video/mp4'>
