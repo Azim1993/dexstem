@@ -21,26 +21,29 @@
                     <div class="col-sm-10 admin_content">
                     @if(Auth::user()->subscribed('main'))
                         <div class="col-sm-6">
-                            <div class="well well-sm">You are now
-                                @if(Auth::user()->subscription('main')->cancelled())
+                            @if(Auth::user()->subscription('main')->cancelled())
+                                <div class="well well-sm">You are now
                                     <span class="label label-success">Active</span>
-                                @else
+                                </div>
+                            @else
+                                <div class="well well-sm">You are now
                                     <span class="label label-danger">UnActive</span>
-                                @endif
-                            </div>
-                            <form action="{{ url('/user/create_subscribe') }}" method="POST">
-                                {{ csrf_field() }}
-                                <script
-                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="pk_test_TLTrAtcbufmQbw18DFM04RG2"
-                                    data-amount="1000"
-                                    data-name="Demo Site"
-                                    data-description="Weekly Premium"
-                                    data-image="{{ asset('/images/logo.png') }}"
-                                    data-email="{{ Auth::user()->email }}"
-                                    data-locale="auto">
-                                </script>
-                            </form>
+                                    <br> Please Resume Your subscription
+                                </div>
+                                <form action="{{ url('/user/resume_subscribe') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <script
+                                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="pk_test_TLTrAtcbufmQbw18DFM04RG2"
+                                            data-amount="1000"
+                                            data-name="Demo Site"
+                                            data-description="Weekly Premium"
+                                            data-image="{{ asset('/images/logo.png') }}"
+                                            data-email="{{ Auth::user()->email }}"
+                                            data-locale="auto">
+                                    </script>
+                                </form>
+                            @endif
                         </div>
                     @else
                         <div class="col-sm-6">

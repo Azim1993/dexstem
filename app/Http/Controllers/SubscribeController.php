@@ -21,4 +21,10 @@ class SubscribeController extends Controller
         return redirect('/user/subscribe')->with('success','Successfully subscribed');
     }
 
+    public function subscribeResume(Request $request)
+    {
+        Auth::user()->newSubscription('main', 'weekly')->resume($request->input('stripeToken'));
+        return redirect('/user/subscribe')->with('success','Successfully subscribed');
+    }
+
 }

@@ -61,6 +61,7 @@ Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
     Route::get('/deshboard', function () {return view('admin.deshboard');});
     Route::get('/subscribe', 'SubscribeController@subscribeForm');
     Route::post('/create_subscribe', 'SubscribeController@subscribeCreate');
+    Route::post('/resume_subscribe', 'SubscribeController@subscribeResume');
 
     Route::post('/store_demand','OnDemandController@store');
 
