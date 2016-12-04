@@ -18,7 +18,6 @@
                                 <div class="panel-body">
                                     <img src="{{ URL::asset('/thumbnail/'.$slide->mediaThumbnail) }}" alt="img" class="img-responsive" />
                                     <i class="icon icon-play-circle2"></i>
-                                    <p>5:30</p>
                                     <h5>{{ $slide->title }}</h5>
                                 </div>
                             </div>
@@ -32,409 +31,124 @@
         </div><!-- /slider -->
         <div class="row home_content">
             <div class="left_content col-sm-8">
+                <!-- -- populer section -- -->
                 <div class="popular_section popular_section_home">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Popular 
                         </div>
                         <div class="panel-body popular_section_in">
-                            <div class="row">
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
+                            @if($popularVideos->count() > 0)
+                                <div class="row">
+                                    @foreach($popularVideos as $popular)
+                                        <div class="col-sm-6 ">
+                                            <div class="single_popular">
+                                                <a href="{{ url('/single/'.encrypt($popular->postId)) }}" class="">
+                                                    <div class="col-xs-6 single_popular_img">
+                                                        <img src="{{ URL::asset('/thumbnail/'.$popular->media['mediaThumbnail']) }}" alt="img" class="img-responsive">
+                                                        <i class="icon icon-play-circle2"></i>
+                                                    </div>
+                                                    <div class="col-xs-6 single_popular_content">
+                                                        <h5>{{ $popular->media['title'] }}</h5>
+                                                        <div class="duration">{{ $popular->media['created_at']->toFormattedDateString() }}</div>
+                                                        <div class="">
+                                                            <span> Views {{ ($popular->view == null)? '0': $popular->view }}</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
+                                    @endforeach
                                 </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                            </div>
+                            @else
+                                No Popular Video
+                            @endif
                         </div>
                     </div>
                 </div> <!-- /populer section -->
+
+
+                <!-- -- left bottom section -- -->
                 <div class="popular_section sports_section_home">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Sports 
+                            Blustering
                         </div>
                         <div class="panel-body popular_section_in">
-                            <div class="row">
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
+                            @if($leftVideos->count() > 0)
+                                <div class="row">
+                                @foreach($leftVideos as $leftVideo)
+                                    <div class="col-sm-6 ">
+                                    <div class="single_popular">
+                                        <a href="{{ url('/single/'.encrypt($leftVideo->id)) }}" class="">
+                                            <div class="col-xs-6 single_popular_img">
+                                                <img src="{{ URL::asset('/thumbnail/'.$leftVideo->mediaThumbnail) }}" alt="img" class="img-responsive">
+                                                <i class="icon icon-play-circle2"></i>
+                                            </div>
+                                            <div class="col-xs-6 single_popular_content">
+                                                <h5>{{ $leftVideo->title }}</h5>
+                                                <div class="thumb_user_choose">
+                                         <span>
+                                             <i class="icon icon-thumbs-up"></i>
+                                             {{ ($leftVideo->likeOrDislike['like'] == null)? '0': $leftVideo->likeOrDislike['like'] }}
+                                         </span>
+
+                                         <span>
+                                             <i class="icon icon-thumbs-down"></i>
+                                             {{ ($leftVideo->likeOrDislike['dislike'] == null)? '0': $leftVideo->likeOrDislike['dislike'] }}
+                                         </span>
+                                                </div>
+                                                <div class="duration">{{ $leftVideo->created_at->toFormattedDateString() }}</div>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
                                     </div>
-                                    </a>
+                                @endforeach
                                 </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                <div class="single_popular">
-                                    <a href="" class="">
-                                    <div class="col-xs-6 single_popular_img">
-                                        <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                        <i class="icon icon-sun"></i>
-                                    </div>
-                                    <div class="col-xs-6 single_popular_content">
-                                        <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                         <div class="thumb_user_choose">
-                                            <span class="user_choose_icon">
-                                                 <i class="icon icon-emo-thumbsup"></i>
-                                                 <span>255</span>
-                                            </span>
-                                            <span class="user_choose_icon">
-                                            <i class="icon icon-emo-shoot"></i>
-                                            <span class="last">255</span>
-                                            </span>
-                                        </div>
-                                        <div class="duration">Duration : 5:30</div>
-                                    </div>
-                                    </a>
-                                </div>
-                                </div>
-                                
-                            </div>
+                            @else
+                                <div class="well well-sm">No Video found</div>
+                            @endif
                         </div>
                     </div>
                 </div> <!-- /sports section -->
             </div>
+
             <div class="col-sm-4 right_content ">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Related
+                        Wanted
                     </div>
 
                     <div class="panel-body right_content_body_home">
-                        <div class="single_popular">
-                            <a href="" class="">
-                            <div class="col-xs-6 single_popular_img">
-                                <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                <i class="icon icon-sun"></i>
-                            </div>
-                            <div class="col-xs-6 single_popular_content">
-                                <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                 <div class="thumb_user_choose">
-                                    <span class="user_choose_icon">
-                                         <i class="icon icon-emo-thumbsup"></i>
-                                         <span>255</span>
-                                    </span>
-                                    <span class="user_choose_icon">
-                                    <i class="icon icon-emo-shoot"></i>
-                                    <span class="last">255</span>
-                                    </span>
+                        @if($rightVideos->count() > 0)
+                            @foreach($rightVideos as $rightVideo)
+                                <div class="single_popular">
+                                    <a href="{{ url('/single/'.encrypt($rightVideo->id)) }}" class="">
+                                    <div class="col-xs-6 single_popular_img">
+                                        <img src="{{ URL::asset('/thumbnail/'.$rightVideo->mediaThumbnail) }}" alt="img" class="img-responsive">
+                                        <i class="icon icon-play-circle2"></i>
+                                    </div>
+                                    <div class="col-xs-6 single_popular_content">
+                                        <h5>{{ $rightVideo->title }}</h5>
+                                         <div class="thumb_user_choose">
+                                             <span>
+                                                 <i class="icon icon-thumbs-up"></i>
+                                                 {{ ($rightVideo->likeOrDislike['like'] == null)? '0': $rightVideo->likeOrDislike['like'] }}
+                                             </span>
+
+                                             <span>
+                                                 <i class="icon icon-thumbs-down"></i>
+                                                 {{ ($rightVideo->likeOrDislike['dislike'] == null)? '0': $rightVideo->likeOrDislike['dislike'] }}
+                                             </span>
+                                        </div>
+                                        <div class="duration">{{ $rightVideo->created_at->toFormattedDateString() }}</div>
+                                    </div>
+                                    </a>
                                 </div>
-                                <div class="duration">Duration : 5:30</div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="single_popular">
-                            <a href="" class="">
-                            <div class="col-xs-6 single_popular_img">
-                                <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                <i class="icon icon-sun"></i>
-                            </div>
-                            <div class="col-xs-6 single_popular_content">
-                                <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                 <div class="thumb_user_choose">
-                                    <span class="user_choose_icon">
-                                         <i class="icon icon-emo-thumbsup"></i>
-                                         <span>255</span>
-                                    </span>
-                                    <span class="user_choose_icon">
-                                    <i class="icon icon-emo-shoot"></i>
-                                    <span class="last">255</span>
-                                    </span>
-                                </div>
-                                <div class="duration">Duration : 5:30</div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="single_popular">
-                            <a href="" class="">
-                            <div class="col-xs-6 single_popular_img">
-                                <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                <i class="icon icon-sun"></i>
-                            </div>
-                            <div class="col-xs-6 single_popular_content">
-                                <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                 <div class="thumb_user_choose">
-                                    <span class="user_choose_icon">
-                                         <i class="icon icon-emo-thumbsup"></i>
-                                         <span>255</span>
-                                    </span>
-                                    <span class="user_choose_icon">
-                                    <i class="icon icon-emo-shoot"></i>
-                                    <span class="last">255</span>
-                                    </span>
-                                </div>
-                                <div class="duration">Duration : 5:30</div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="single_popular">
-                            <a href="" class="">
-                            <div class="col-xs-6 single_popular_img">
-                                <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                <i class="icon icon-sun"></i>
-                            </div>
-                            <div class="col-xs-6 single_popular_content">
-                                <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                 <div class="thumb_user_choose">
-                                    <span class="user_choose_icon">
-                                         <i class="icon icon-emo-thumbsup"></i>
-                                         <span>255</span>
-                                    </span>
-                                    <span class="user_choose_icon">
-                                    <i class="icon icon-emo-shoot"></i>
-                                    <span class="last">255</span>
-                                    </span>
-                                </div>
-                                <div class="duration">Duration : 5:30</div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="single_popular">
-                            <a href="" class="">
-                            <div class="col-xs-6 single_popular_img">
-                                <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                <i class="icon icon-sun"></i>
-                            </div>
-                            <div class="col-xs-6 single_popular_content">
-                                <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                 <div class="thumb_user_choose">
-                                    <span class="user_choose_icon">
-                                         <i class="icon icon-emo-thumbsup"></i>
-                                         <span>255</span>
-                                    </span>
-                                    <span class="user_choose_icon">
-                                    <i class="icon icon-emo-shoot"></i>
-                                    <span class="last">255</span>
-                                    </span>
-                                </div>
-                                <div class="duration">Duration : 5:30</div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="single_popular">
-                            <a href="" class="">
-                            <div class="col-xs-6 single_popular_img">
-                                <img src="{{ URL::asset('/images/related.jpg') }}" alt="img" class="img-responsive">
-                                <i class="icon icon-sun"></i>
-                            </div>
-                            <div class="col-xs-6 single_popular_content">
-                                <h5>Lorem ipsum dolor sit amet, consectetur.</h5>
-                                 <div class="thumb_user_choose">
-                                    <span class="user_choose_icon">
-                                         <i class="icon icon-emo-thumbsup"></i>
-                                         <span>255</span>
-                                    </span>
-                                    <span class="user_choose_icon">
-                                    <i class="icon icon-emo-shoot"></i>
-                                    <span class="last">255</span>
-                                    </span>
-                                </div>
-                                <div class="duration">Duration : 5:30</div>
-                            </div>
-                            </a>
-                        </div>
+                            @endforeach
+                        @else
+                            <div class="well well-sm">No Video found</div>
+                        @endif
                     </div>
                 </div>
             </div><!-- /right content -->

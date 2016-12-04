@@ -25,17 +25,17 @@
                             Current Viewers
                         </div>
                         <div class="panel-body">
-                            <h1>25635</h1>
+                            <h1>{{ $totalView }}</h1>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Total Vedio
+                            Total Video
                         </div>
                         <div class="panel-body">
-                            <h1>25635</h1>
+                            <h1>{{ $totalVideo }}</h1>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             Subscriber's
                         </div>
                         <div class="panel-body">
-                            <h1>25635</h1>
+                            <h1>{{ $totalUser }}</h1>
                         </div>
                     </div>
                 </div>

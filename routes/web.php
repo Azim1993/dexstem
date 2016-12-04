@@ -17,13 +17,14 @@ Route::get('/single/{id}', 'Videos\SingleVideoPageController@show');
 Route::get('/permission', function () {return view('errors.permissionNeeded');});
 Route::get('/user/activation/{token}','ActivationController@userActivate');
 Route::get('/comments/{postId}','CommentController@showComment');
+
 //Route::post('/view','ViewCounterController@storeView');
 
 Auth::routes();
 
 //-- media manage --//
 Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
-    Route::get('/deshboard', function () {return view('admin.deshboard');});
+    Route::get('/deshboard', 'PanelController@admin');
 //-- manage media info --//
     Route::get('/all-media', 'Videos\MediaInfoController@index');
     Route::get('/add-media', 'Videos\MediaInfoController@create');
@@ -58,11 +59,11 @@ Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
 
 
 Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
-    Route::get('/deshboard', function () {return view('admin.deshboard');});
+    Route::get('/deshboard', 'PanelController@admin');
     Route::get('/subscribe', 'SubscribeController@subscribeForm');
     Route::post('/create_subscribe', 'SubscribeController@subscribeCreate');
     Route::post('/resume_subscribe', 'SubscribeController@subscribeResume');
-    Route::post('/resume_subscribe', 'SubscribeController@subscribeUpgrade');
+    Route::post('/upgrade_subscribe', 'SubscribeController@subscribeUpgrade');
     Route::post('/cancel_subscribe', 'SubscribeController@subscribeCancel');
 
     Route::post('/store_demand','OnDemandController@store');

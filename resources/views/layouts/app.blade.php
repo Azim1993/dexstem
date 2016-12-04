@@ -32,7 +32,16 @@
                 <div class="col-sm-8 header_menu">
                     <ul class="nav nav-pills">
                         <li><a href="{{ url('/') }}">Home</a></li>
-                        <li><a href="">category</a></li>
+                        <li><a href="">category</a>
+                            <?php $categories = DB::table('category')->orderBy('id','asc')->get() ?>
+                            @if($categories->count() > 0)
+                            <ul class="child_menu nav">
+                                @foreach($categories as $category)
+                                    <li><a href="{{ url('/media/category/'.$category->id) }}">{{ $category->catTitle }}</a></li>
+                                @endforeach
+                            </ul>
+                            @endif
+                        </li>
                         <li><a href="">Policy</a></li>
                         <li><a href="">Tearms</a></li>
                         <li><a href="">Contact</a></li>
@@ -105,6 +114,48 @@
   
     @yield('content')
 
+    <section class="footer">
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-3 footer_div">
+                <h4>Categories</h4>
+                <?php $categories = DB::table('category')->orderBy('id','asc')->limit(3)->get() ?>
+                @if($categories->count() > 0)
+                    <ul class="nav">
+                        @foreach($categories as $category)
+                            <li><a href="{{ url('/media/category/'.$category->id) }}">{{ $category->catTitle }}</a></li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+            <div class="col-sm-3 footer_div">
+                <h4>About</h4>
+                <ul class="nav">
+                    <li><a href="">Terms & Condition</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3 footer_div">
+                <h4>Query</h4>
+                <ul class="nav">
+                    <h5>For Any Query </h5>
+                    <h5>Email Us </h5>
+                    <h5>dexstem@dexstem.com</h5>
+                </ul>
+            </div>
+            <div class="col-sm-3 footer_div">
+                <h4>Connect</h4>
+                <ul class="nav">
+                    <li><a href=""><i class="icon-facebook"></i>FaceBook</a></li>
+                    <li><a href=""><i class="icon-twitter"></i>Twitter</a></li>
+                    <li><a href=""><i class="icon-gplus"></i>GooglePlus</a></li>
+                </ul>
+            </div>
+        </div>
+            <div class="footer_credit text-center">&#9400; All Right Reserved BY dexstem.com</div>
+        </div>
+    </section>
     <!-- Scripts -->
     <script src="{{ URL::asset('/js/app.js') }}"></script>
 

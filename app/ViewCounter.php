@@ -12,8 +12,8 @@ class ViewCounter extends Model
 
     protected $fillable = ['postId','view'];
 
-    public function media()
+    protected function media()
     {
-        $this->hasOne('App\Media\MediaInfo','id','postId');
+        return $this->hasOne('App\Media\MediaInfo','id','postId');
     }
 }

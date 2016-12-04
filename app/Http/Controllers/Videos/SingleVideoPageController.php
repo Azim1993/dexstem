@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Videos;
 
+use App\Media\LikeDislike;
 use App\Media\MediaInfo;
 use App\ViewCounter;
 use Illuminate\Http\Request;
@@ -14,9 +15,11 @@ class SingleVideoPageController extends Controller
         $videoId = decrypt($id);
 
         $video = MediaInfo::find($videoId);
+        $popularVideos = $this->popularVideos(2);
+        $relatedVideos = MediaInfo::where('category_id',$video->category_id)->where('id', '!=', $videoId)->limit(6)->get();
 
         if($video == true)
-            return view('single',compact('video'));
+            return view('single',compact('video','relatedVideos','popularVideos'));
         return abort(404);
     }
 
@@ -52,5 +55,10 @@ class SingleVideoPageController extends Controller
             'postId' => $postId,
             'view'   => 1
         ]);
+    }
+
+    public function popularVideos($limit)
+    {
+        return ViewCounter::orderBy('view','desc')->limit($limit)->get();
     }
 }
