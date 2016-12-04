@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="col-sm-8 search">
-                    <form action="" method="GET">
+                    <form action="{{ '/search_results' }}" method="GET">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search" name="vedio_search">
 
