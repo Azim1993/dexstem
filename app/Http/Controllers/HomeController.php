@@ -22,4 +22,24 @@ class HomeController extends Controller
     {
         return MediaInfo::whereIn('category_id', $category)->orderBy('created_at','desc')->limit($limit)->get();
     }
+
+    protected function search(Request $request)
+    {
+        $this->validate($request,['video_search' => 'required']);
+        $search = $request->input('video_search');
+        $result = MediaInfo::where("title", "LIKE", "%$search%")
+                    ->orderBy('created_at','desc')->limit(10)->get();
+        $popularVideos = (new SingleVideoPageController())->popularVideos(6);
+
+        return view('search',compact('result','popularVideos','search'));
+    }
+
+    protected function categoryPage($id)
+    {
+        $result = MediaInfo::where("category_id", $id)
+                    ->orderBy('created_at','desc')->limit(10)->get();
+        $popularVideos = (new SingleVideoPageController())->popularVideos(6);
+
+        return view('search',compact('result','popularVideos'));
+    }
 }

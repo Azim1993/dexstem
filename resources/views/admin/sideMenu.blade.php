@@ -4,10 +4,10 @@
         <li><a href="{{ url('/admin/all-media') }}">Videos</a></li>
         <li><a href="{{ url('/admin/categories') }}">Categories</a></li>
         <li><a href="{{ url('/admin/users') }}">Users</a></li>
-        <li><a href="{{ url('/user/subscribe') }}">Subscriber</a></li>
         <li><a href="{{ url('admin/demands') }}">Demands</a></li>
     @else
-        <li><a href="{{ url('user/profile') }}">Profile</a></li>
+        <li><a href="{{ url('user/deshboard') }}">Profile</a></li>
+        <li><a href="{{ url('/user/subscribe') }}">Subscriber</a></li>
         <li><a href="{{ url('user/demands') }}">Demands</a></li>
     @endif
     </ul>

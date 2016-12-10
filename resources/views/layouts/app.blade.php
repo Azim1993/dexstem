@@ -99,7 +99,7 @@
                 <div class="col-sm-8 search">
                     <form action="{{ '/search_results' }}" method="GET">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" name="vedio_search">
+                            <input type="text" class="form-control" placeholder="Search" name="video_search" value="{{ isset($search)? $search: '' }}">
 
                             <button class="btn btn-default" type="submit">Search</button>
                         </div>

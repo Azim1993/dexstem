@@ -17,7 +17,7 @@ class OnDemandController extends Controller
     protected function userDemands()
     {
         $demands = Demand::where('userId',Auth::user()->id)->limit(20)->get();
-        return view('',compact('demands'));
+        return view('user.userDemand',compact('demands'));
     }
 
     protected function store(Request $request)
@@ -53,4 +53,5 @@ class OnDemandController extends Controller
             return back()->with('success','Marked as publish');
         return back()->with('warning','can not Marked as publish');
     }
+
 }

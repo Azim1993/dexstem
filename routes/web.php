@@ -17,6 +17,8 @@ Route::get('/single/{id}', 'Videos\SingleVideoPageController@show');
 Route::get('/permission', function () {return view('errors.permissionNeeded');});
 Route::get('/user/activation/{token}','ActivationController@userActivate');
 Route::get('/comments/{postId}','CommentController@showComment');
+Route::get('/media/category/{catId}','HomeController@categoryPage');
+Route::get('/search_results','HomeController@search');
 
 //Route::post('/view','ViewCounterController@storeView');
 
@@ -59,7 +61,7 @@ Route::group(['middleware'=> ['admin','auth'],'prefix' => 'admin'], function() {
 
 
 Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
-    Route::get('/deshboard', 'PanelController@admin');
+    Route::get('/deshboard', 'UserDetailController@userBoard');
     Route::get('/subscribe', 'SubscribeController@subscribeForm');
     Route::post('/create_subscribe', 'SubscribeController@subscribeCreate');
     Route::post('/resume_subscribe', 'SubscribeController@subscribeResume');
@@ -67,6 +69,7 @@ Route::group(['middleware'=> 'auth','prefix' => 'user'], function() {
     Route::post('/cancel_subscribe', 'SubscribeController@subscribeCancel');
 
     Route::post('/store_demand','OnDemandController@store');
+    Route::get('/demands','OnDemandController@userDemands');
 
 //    comment
     Route::post('/store_comment/{postId}','CommentController@storeComment');
