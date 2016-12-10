@@ -30,7 +30,7 @@
                                     {{ csrf_field() }}
                                     <script
                                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                            data-key="pk_test_TLTrAtcbufmQbw18DFM04RG2"
+                                            data-key="{{ env('STRIPE_KEY') }}"
                                             data-amount="1000"
                                             data-name="Demo Site"
                                             data-description="Weekly Premium"
@@ -74,7 +74,7 @@
                                 {{ csrf_field() }}
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="pk_test_TLTrAtcbufmQbw18DFM04RG2"
+                                    data-key="{{ env('STRIPE_KEY') }}"
                                     data-amount="1000"
                                     data-name="Demo Site"
                                     data-description="Weekly Premium"
@@ -95,3 +95,4 @@
 @section('customJs')
 
 @endsection
+
